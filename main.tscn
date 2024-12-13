@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://c700pjn84lp4f"]
+[gd_scene load_steps=21 format=3 uid="uid://c700pjn84lp4f"]
 
 [ext_resource type="Script" path="res://Camera3d.cs" id="1_l0alh"]
 [ext_resource type="PackedScene" uid="uid://d1p66onp0vo8q" path="res://robot_arm.tscn" id="1_sb113"]
 [ext_resource type="Texture2D" uid="uid://bhha8lreq2d6e" path="res://sky_t.png" id="2_s6tow"]
 [ext_resource type="Script" path="res://ArmControl.cs" id="2_swran"]
 [ext_resource type="ArrayMesh" uid="uid://uubw5x10q1qv" path="res://ballsink.obj" id="4_3owqo"]
+[ext_resource type="Script" path="res://BallSink2.cs" id="6_2hkj4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_5wngm"]
 panorama = ExtResource("2_s6tow")
@@ -27,6 +28,47 @@ bounce = 0.52
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_kh3ay"]
 data = PackedVector3Array(-2.7, 0.1116, -2.7, 2.7, 0.1116, -2.7, -1.0338, -0.4665, -1.0338, -1.0338, -0.4665, -1.0338, 2.7, 0.1116, -2.7, 1.045, -0.4665, -1.0451, 2.7, 0.1116, 2.7, 2.7, -0.5142, 2.7, -2.7, 0.1116, 2.7, -2.7, 0.1116, 2.7, 2.7, -0.5142, 2.7, -2.7, -0.5142, 2.7, -2.7, 0.1116, 2.7, -2.7, -0.5142, 2.7, -2.7, 0.1116, -2.7, -2.7, 0.1116, -2.7, -2.7, -0.5142, 2.7, -2.7, -0.5142, -2.7, 2.7, -0.5142, -2.7, -2.7, -0.5142, -2.7, 2.7, -0.5142, 2.7, 2.7, -0.5142, 2.7, -2.7, -0.5142, -2.7, -2.7, -0.5142, 2.7, 2.7, 0.1116, -2.7, 2.7, -0.5142, -2.7, 2.7, 0.1116, 2.7, 2.7, 0.1116, 2.7, 2.7, -0.5142, -2.7, 2.7, -0.5142, 2.7, -2.7, 0.1116, -2.7, -2.7, -0.5142, -2.7, 2.7, 0.1116, -2.7, 2.7, 0.1116, -2.7, -2.7, -0.5142, -2.7, 2.7, -0.5142, -2.7, 1.0613, -0.4665, 1.0613, 2.7, 0.1116, 2.7, -1.0413, -0.4665, 1.0412, -1.0413, -0.4665, 1.0412, 2.7, 0.1116, 2.7, -2.7, 0.1116, 2.7, -1.0413, -0.4665, 1.0412, -2.7, 0.1116, 2.7, -1.0338, -0.4665, -1.0338, -1.0338, -0.4665, -1.0338, -2.7, 0.1116, 2.7, -2.7, 0.1116, -2.7, 1.0613, -0.4665, 1.0613, 0, -0.4665, 0, 1.045, -0.4665, -1.0451, -1.0413, -0.4665, 1.0412, -1.0338, -0.4665, -1.0338, 0, -0.4665, 0, 1.0613, -0.4665, 1.0613, -1.0413, -0.4665, 1.0412, 0, -0.4665, 0, 1.0613, -0.4665, 1.0613, 1.045, -0.4665, -1.0451, 2.7, 0.1116, 2.7, 2.7, 0.1116, 2.7, 1.045, -0.4665, -1.0451, 2.7, 0.1116, -2.7, -1.0338, -0.4665, -1.0338, 1.045, -0.4665, -1.0451, 0, -0.4665, 0)
 
+[sub_resource type="Gradient" id="Gradient_5bj0e"]
+offsets = PackedFloat32Array(0, 0.360587, 0.620545, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.165471, 0.165471, 0.165471, 1, 0.450644, 0.450644, 0.450644, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qm724"]
+gradient = SubResource("Gradient_5bj0e")
+
+[sub_resource type="Curve" id="Curve_umxpv"]
+min_value = -1.0
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_881s2"]
+curve = SubResource("Curve_umxpv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h6jth"]
+direction = Vector3(0, 1, 0)
+spread = 87.857
+initial_velocity_max = 5.0
+gravity = Vector3(0, 9.8, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = 5.0
+tangential_accel_min = -2.23517e-06
+tangential_accel_max = 5.0
+color = Color(0.996078, 0, 0, 1)
+color_ramp = SubResource("GradientTexture1D_qm724")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("CurveTexture_881s2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3dqxn"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_hhd64"]
+material = SubResource("StandardMaterial3D_3dqxn")
+shape = 0
+
 [node name="origin" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49003, 0.827808)
 
@@ -47,7 +89,9 @@ script = ExtResource("2_swran")
 
 [node name="PrizeBall" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.61636, 2.62841, 1.24698)
+mass = 0.027
 physics_material_override = SubResource("PhysicsMaterial_srd6f")
+gravity_scale = 0.086
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PrizeBall"]
 shape = SubResource("SphereShape3D_5oth5")
@@ -68,6 +112,7 @@ skeleton = NodePath("../../..")
 
 [node name="BallSink2" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6567, 0, -0.579737)
+script = ExtResource("6_2hkj4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BallSink2"]
 shape = SubResource("ConcavePolygonShape3D_kh3ay")
@@ -75,3 +120,21 @@ shape = SubResource("ConcavePolygonShape3D_kh3ay")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="BallSink2/CollisionShape3D"]
 mesh = ExtResource("4_3owqo")
 skeleton = NodePath("../../..")
+
+[node name="_sinkArea" type="Area3D" parent="BallSink2/CollisionShape3D"]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="BallSink2/CollisionShape3D/_sinkArea"]
+shape = SubResource("ConcavePolygonShape3D_kh3ay")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BallSink2/CollisionShape3D/_sinkArea/CollisionShape3D2"]
+mesh = ExtResource("4_3owqo")
+skeleton = NodePath("../../../../..")
+
+[node name="_confettiParticles" type="GPUParticles3D" parent="BallSink2"]
+amount = 9
+lifetime = 1.84
+explosiveness = 1.0
+trail_enabled = true
+trail_lifetime = 0.53
+process_material = SubResource("ParticleProcessMaterial_h6jth")
+draw_pass_1 = SubResource("RibbonTrailMesh_hhd64")

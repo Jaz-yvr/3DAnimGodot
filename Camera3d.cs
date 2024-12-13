@@ -42,15 +42,15 @@ public partial class Camera3d : Camera3D
 		if (@event is InputEventMouseButton mouseButton)
 		{
 			if (mouseButton.ButtonIndex == MouseButton.WheelUp)
-        	{
-            	DISTANCE -= 0.2f;
+			{
+				DISTANCE -= 0.2f;
 				DISTANCE = Mathf.Clamp(DISTANCE, 1, 10);
-        	}
-    		else if (mouseButton.ButtonIndex == MouseButton.WheelDown)
-        	{
-            	DISTANCE += 0.2f;
+			}
+			else if (mouseButton.ButtonIndex == MouseButton.WheelDown)
+			{
+				DISTANCE += 0.2f;
 				DISTANCE = Mathf.Clamp(DISTANCE, 1, 10);
-        	}
+			}
 		}
 
 		// this should be for touch pads
